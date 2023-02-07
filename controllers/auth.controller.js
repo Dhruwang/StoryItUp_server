@@ -20,7 +20,7 @@ async function createUser(req, res){
     const {email,password,role}=req.body
     let user = await User.findOne({ email: email })
     if (user) {
-        return res.status(400).json({ error: "sorry user with same email already exist" })
+        return res.status(400).json({ error: "user already exist" })
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -55,11 +55,11 @@ async function loginUser(req,res){
     try {
         const user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({error:"please enter valid credentials"})
+            return res.status(400).json({error:"invalid credentials"})
         }
         const passwordCompare = await bcrypt.compare(password,user.password);
         if(!passwordCompare){
-            return res.status(400).json({error:"please enter valid credentials"})
+            return res.status(400).json({error:"invalid credentials"})
         }
         const data ={
             user:{
