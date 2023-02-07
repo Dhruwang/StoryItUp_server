@@ -24,7 +24,8 @@ async function publishStory(req,res){
 async function fetchStories(req,res) {
     try {
         const Stories = await Story.find({})
-        res.status(200).send(stories)
+        res.status(200).send(Stories)
+        
     } catch (error) {
         res.status(400).json({"error":"internal server error"})
     }
