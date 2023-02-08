@@ -34,7 +34,6 @@ async function fetchStories(req,res) {
 async function fetchSingleStory(req,res) {
     try {
         const id = req.query.id
-        console.log(id)
         const reqStory = await Story.findById(id)
         res.status(200).send(reqStory)
         
