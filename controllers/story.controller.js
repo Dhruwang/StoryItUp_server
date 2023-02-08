@@ -3,8 +3,9 @@ const Story = require('../models/story')
 const fetchUser = require("../middlewares/fetchUser")
 require("dotenv").config()
 
-async function publishStory(req,res){   
-    const{name,description,sector,founders,year,story,funding,problem,solution,website,linkedin,imgLink} = req.body;
+async function publishStory(req,res){ 
+    try {
+        const{name,description,sector,founders,year,story,funding,problem,solution,website,linkedin,imgLink} = req.body;
     let newStory = await Story.create({
         name:name,
         imgLink:imgLink,
@@ -19,7 +20,11 @@ async function publishStory(req,res){
         website:website,
         linkedIn:linkedin
     })
-    res.status(201).send(newStory)
+    res.status(201).send("ok")
+    } catch (error) {
+        res.status(400).json({"error":"internal server error"})
+    }
+    
 }
 async function fetchStories(req,res) {
     try {
