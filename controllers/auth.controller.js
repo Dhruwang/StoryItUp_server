@@ -63,7 +63,8 @@ async function loginUser(req,res){
         }
         const data ={
             user:{
-                id: user.id
+                id: user.id,
+                role:user.role
             }
         }
         const token = jwt.sign(data, privateKey);
