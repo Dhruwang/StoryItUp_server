@@ -33,13 +33,13 @@ async function createUser(req, res){
     })
     const data = {
         user: {
-            id: user.id
+            id: user.id,
+            role:role
         }
     }
-    console.log(user)
     const token = jwt.sign(data, privateKey);
     success = true
-    res.json({success, token })
+    res.json({success, token,role })
     
 }
 

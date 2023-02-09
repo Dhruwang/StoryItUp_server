@@ -3,10 +3,11 @@ const Investor = require('../models/Investor')
 
 async function saveInvestor(req,res){ 
     try {
-        const{name,description,profession,imgLink,experience,interest,linkedin,twitter} = req.body;
+        const{name,description,profession,imgLink,experience,interest,linkedin,twitter,email} = req.body;
     let newInvestor = await Investor.create({
         name:name,
         imgLink:imgLink,
+        email:email,
         description:description,
         linkedIn:linkedin,
         experience:experience,
