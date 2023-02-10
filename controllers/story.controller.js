@@ -75,6 +75,17 @@ async function fetchSingleStory(req,res) {
     }
     
 }
+async function searchStory(req,res) {
+    try {
+        const search = req.body.search
+        const reqStory = await Story.find({ name: { $regex: search, $options: "i" } })
+        res.status(200).send(reqStory)
+        
+    } catch (error) {
+        res.status(400).json({"error":"internal server error"})
+    }
+    
+}
 async function deleteStory(req,res) {
     try {
         const auth = req.query.auth;
@@ -96,5 +107,5 @@ async function deleteStory(req,res) {
 }
 
 module.exports ={
-    publishStory,fetchStories,fetchSingleStory,deleteStory,editStory
+    publishStory,fetchStories,fetchSingleStory,deleteStory,editStory,searchStory
 }
