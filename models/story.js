@@ -48,6 +48,10 @@ const StorySchema = new Schema({
     },
     futureScope:{
         type:String,
+    },
+    verified:{
+        type: Boolean,
+        default: false 
     }
 
 })

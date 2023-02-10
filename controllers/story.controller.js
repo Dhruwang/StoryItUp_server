@@ -54,6 +54,23 @@ async function editStory(req,res){
         res.status(400).json({"error":"internal server error"})
     }  
 }
+async function editVerify(req,res){ 
+    try {
+        const{verified} = req.body;
+        const id = req.query.id
+    let editStory = await Story.updateOne(
+        { '_id':id },
+        {
+          $set: {
+            'verified': verified,
+          },
+        }
+      )
+    res.status(201).send("ok")
+    } catch (error) {
+        res.status(400).json({"error":"internal server error"})
+    }  
+}
 async function fetchStories(req,res) {
     try {
         const Stories = await Story.find({})
@@ -107,5 +124,5 @@ async function deleteStory(req,res) {
 }
 
 module.exports ={
-    publishStory,fetchStories,fetchSingleStory,deleteStory,editStory,searchStory
+    publishStory,fetchStories,fetchSingleStory,deleteStory,editStory,searchStory,editVerify
 }
